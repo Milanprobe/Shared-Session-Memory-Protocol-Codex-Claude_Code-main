@@ -1,5 +1,8 @@
 # Shared Session Memory Protocol
 
+![Prijelaz u nepromjenjivu memoriju](assets/1.png)
+*Slika 1: Prijelaz iz narativnog chat loga u sustav nepromjenjivih receipt-ova koji čuvaju samo objektivne činjenice.*
+
 This folder is a reusable template for a spec-driven session protocol between two agent tools.
 
 It provides a minimal reusable scaffolding for:
@@ -28,9 +31,6 @@ It provides a minimal reusable scaffolding for:
 Instead of relying on mutable session logs or chat history, the protocol uses a system of immutable receipts.  
 Each completed session generates a JSON file containing only objective facts: what was achieved, which evidence was found, and which acceptance criteria moved from OPEN to PASS or FAIL.  
 This eliminates the risk of the AI agent "inventing" progress that never occurred.
-
-![Prijelaz u nepromjenjivu memoriju](assets/1.png)
-*Slika 1: Prijelaz iz narativnog chat loga u sustav nepromjenjivih receipt-ova koji čuvaju samo objektivne činjenice.*
 
 ---
 
