@@ -1,6 +1,6 @@
 # Shared Session Memory Protocol
 
-![Prijelaz u nepromjenjivu memoriju](assets/1.png)
+![Shared Session Memory Protocol](assets/1.png)
 
 This folder is a reusable template for a spec-driven session protocol between two agent tools.
 
@@ -31,6 +31,8 @@ Instead of relying on mutable session logs or chat history, the protocol uses a 
 Each completed session generates a JSON file containing only objective facts: what was achieved, which evidence was found, and which acceptance criteria moved from OPEN to PASS or FAIL.  
 This eliminates the risk of the AI agent "inventing" progress that never occurred.
 
+![Transition from "narrative" to immutable memory](assets/2.png)
+
 ---
 
 ### 2. Coordination between different AI tools (**Codex ↔ Claude Code**)
@@ -38,7 +40,9 @@ This eliminates the risk of the AI agent "inventing" progress that never occurre
 The protocol is designed as a universal continuity contract that allows two completely different tools (Codex and Claude Code) to work on the same project without manual information transfer.  
 Through a system of hooks, each tool automatically receives a `memory injection` at the start of a session, ensuring both see the same truth and continue where the previous one left off.
 
-![Koordinacija alata](assets/2.png)
+![Upute za korištenje templata](assets/7.png)
+
+![Verifikacija pronađenih tvrdnji](assets/5.png)
 
 ---
 
@@ -49,7 +53,9 @@ Every design (Spec) contains a stable priority selector.
 When a new session begins, the agent loads the latest `receipt`, and the `selector` automatically assigns the next `OPEN` or `FAIL` task.  
 The AI does not choose work "at random" or based on code line counts, but strictly follows the order dictated by the protocol.
 
-![Automatski izbor zadataka](assets/3.png)
+![Automated task selection](assets/3.png)
+
+![Automated tasks](assets/6.png)
 
 ---
 
@@ -63,7 +69,7 @@ Instead of the entire project history, the agent loads only:
 
 This saves resources and prevents the AI from being confused by outdated information from earlier development phases.
 
-![Bounded Context i ušteda tokena](assets/4.png)
+![Bounded Context and Extreme token efficiency](assets/4.png)
 
 ---
 
@@ -73,7 +79,8 @@ The protocol introduces **MODE=REVIEW**, used for processing findings from other
 Each finding must be judged claim‑by‑claim as `CONFIRMED`, `FALSE_POSITIVE`, or `STALE`, and recorded as permanent evidence in the repository.  
 This ensures that no suggestion remains "in the air," but instead receives a formal engineering verdict.
 
-![Verifikacija pronađenih tvrdnji](assets/5.png)
+![Rigorous verification of external findings](assets/8.png)
+
 
 ---
 
@@ -82,7 +89,7 @@ This ensures that no suggestion remains "in the air," but instead receives a for
 At the end of each session, the agent must generate a `ready‑to‑copy prompt` for the next session.  
 This prompt directly references the `Spec ID` and `operating mode`, creating an unbroken chain of development where the user simply copies the instruction prepared by the previous session based on[...]
 
-![Zatvaranje sesije i priprema prompta za slijedeću](assets/6.png)
+![Mandatory session‑closing](assets/9.png)
 
 ---
 
@@ -94,8 +101,6 @@ This prompt directly references the `Spec ID` and `operating mode`, creating an 
 4. Keep receipts immutable and update `index.json` from receipts.
 5. Link evidence artifacts in receipts rather than embedding large contents.
 
-![Upute za korištenje templata](assets/7.png)
-
 ---
 
 ## What this template is not
@@ -104,8 +109,6 @@ This prompt directly references the `Spec ID` and `operating mode`, creating an 
 - It does not contain production `specs/` or real session history.
 - It does not hard-code specific client folder names or configuration values.
 - It is not a complete implementation of any particular agent integration.
-
-![Ograničenja templata](assets/8.png)
 
 ---
 
@@ -116,8 +119,6 @@ This prompt directly references the `Spec ID` and `operating mode`, creating an 
 - `index.json` is derived from receipts and should not be treated as the source of truth.
 - Hooks should inject pointers and metadata, not full session transcripts.
 - External findings should be reviewed via `MODE=REVIEW` and recorded in receipts.
-
-![Preporučeni workflow](assets/9.png)
 
 ---
 
