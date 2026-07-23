@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "generated_at": "2026-07-21T12:00:00+02:00",
+  "specs": {
+    "spec-template": {
+      "path": "specs/spec-template.md",
+      "latest_receipt": null,
+      "receipt_count": 0
+    }
+  }
+}

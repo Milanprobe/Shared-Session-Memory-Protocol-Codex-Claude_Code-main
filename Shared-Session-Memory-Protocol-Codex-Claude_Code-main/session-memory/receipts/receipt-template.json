@@ -1,0 +1,29 @@
+{
+  "receipt_version": 1,
+  "receipt_id": "example-0001",
+  "spec_id": "example-spec-001",
+  "created_at": "2026-07-21T12:00:00+02:00",
+  "branch": "template/initial",
+  "head": "0123456789abcdef0123456789abcdef01234567",
+  "producer": "producer-a",
+  "mode": "AUTO",
+  "objective": "Template session demonstrating required fields for all MODEs (P/E/AUTO/REVIEW).",
+  "result": "COMPLETE",
+  "commit": null,
+  "supersedes": null,
+  "related_receipts": [],
+  "artifacts": [
+    { "kind": "spec", "path": "specs/spec-template.md" },
+    { "kind": "session_index", "path": "session-memory/index.json" }
+  ],
+  "evidence": [
+    { "id": "E-001", "summary": "Template evidence entry", "ref": "specs/spec-template.md", "evidence_kind": "DESIGN_DECISION" }
+  ],
+  "mechanism_matrix": [],
+  "review_findings": [],
+  "acceptance": [
+    { "criterion": "active_design_and_bounds_aligned", "status": "PASS", "evidence_refs": ["E-001"] }
+  ],
+  "open_findings": [],
+  "blockers": []
+}

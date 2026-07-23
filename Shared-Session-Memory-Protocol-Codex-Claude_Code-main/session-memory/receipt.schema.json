@@ -1,0 +1,175 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/receipt.schema.json",
+  "title": "Reusable spec-driven session receipt",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "receipt_version",
+    "receipt_id",
+    "spec_id",
+    "created_at",
+    "branch",
+    "head",
+    "mode",
+    "objective",
+    "result",
+    "commit",
+    "supersedes",
+    "related_receipts",
+    "artifacts",
+    "evidence",
+    "acceptance",
+    "open_findings",
+    "blockers"
+  ],
+  "properties": {
+    "receipt_version": { "const": 1 },
+    "receipt_id": { "type": "string", "minLength": 1 },
+    "spec_id": { "type": "string", "minLength": 1 },
+    "created_at": { "type": "string", "format": "date-time" },
+    "branch": { "type": "string", "minLength": 1 },
+    "head": { "type": "string", "pattern": "^[0-9a-f]{7,40}$" },
+    "producer": { "type": "string", "minLength": 1 },
+    "mode": { "enum": ["DESIGN_BOOTSTRAP", "P", "E", "FIX", "REVIEW", "AUTO"] },
+    "objective": { "type": "string", "minLength": 1 },
+    "result": { "enum": ["COMPLETE", "PARTIAL", "BLOCKED", "NOOP"] },
+    "commit": {
+      "type": ["string", "null"],
+      "pattern": "^[0-9a-f]{7,40}$"
+    },
+    "supersedes": { "type": ["string", "null"] },
+    "related_receipts": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["kind", "path"],
+        "properties": {
+          "kind": { "type": "string", "minLength": 1 },
+          "path": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "summary", "ref"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "summary": { "type": "string", "minLength": 1 },
+          "ref": { "type": "string", "minLength": 1 },
+          "evidence_kind": {
+            "enum": [
+              "RUNTIME_OBSERVATION",
+              "CODE_FACT",
+              "EXTERNAL_CONTRACT",
+              "DESIGN_DECISION",
+              "HYPOTHESIS"
+            ]
+          }
+        }
+      }
+    },
+    "mechanism_matrix": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["field", "mechanism", "stage", "status", "evidence_refs"],
+        "properties": {
+          "field": { "type": "string", "minLength": 1 },
+          "mechanism": {
+            "enum": ["dom_structured", "text_ai", "vision", "dino_sam"]
+          },
+          "stage": { "type": "string", "minLength": 1 },
+          "status": {
+            "enum": [
+              "PASS",
+              "FAIL",
+              "SOURCE_ABSENT",
+              "NOT_APPLICABLE",
+              "NOT_OBSERVED"
+            ]
+          },
+          "evidence_refs": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": { "type": "string", "minLength": 1 }
+          },
+          "note": { "type": "string" }
+        }
+      }
+    },
+    "review_findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "verdict", "disposition", "summary", "evidence_refs"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "verdict": {
+            "enum": [
+              "CONFIRMED",
+              "FALSE_POSITIVE",
+              "STALE",
+              "NOT_REPRODUCED",
+              "NOT_APPLICABLE"
+            ]
+          },
+          "disposition": { "enum": ["OPEN", "FIXED", "NO_ACTION"] },
+          "summary": { "type": "string", "minLength": 1 },
+          "evidence_refs": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": { "type": "string", "minLength": 1 }
+          },
+          "owner_hint": { "type": "string" }
+        }
+      }
+    },
+    "acceptance": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["criterion", "status", "evidence_refs"],
+        "properties": {
+          "criterion": { "type": "string", "minLength": 1 },
+          "status": { "enum": ["PASS", "OPEN", "FAIL", "NOT_APPLICABLE"] },
+          "evidence_refs": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": { "type": "string", "minLength": 1 }
+          }
+        }
+      }
+    },
+    "open_findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "summary", "owner_hint"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "summary": { "type": "string", "minLength": 1 },
+          "owner_hint": { "type": "string" }
+        }
+      }
+    },
+    "blockers": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    }
+  }
+}
