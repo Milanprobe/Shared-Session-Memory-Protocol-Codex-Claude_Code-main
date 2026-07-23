@@ -1,7 +1,6 @@
 # Shared Session Memory Protocol
 
 ![Prijelaz u nepromjenjivu memoriju](assets/1.png)
-*Slika 1: Prijelaz iz narativnog chat loga u sustav nepromjenjivih receipt-ova koji čuvaju samo objektivne činjenice.*
 
 This folder is a reusable template for a spec-driven session protocol between two agent tools.
 
@@ -40,7 +39,6 @@ The protocol is designed as a universal continuity contract that allows two comp
 Through a system of hooks, each tool automatically receives a `memory injection` at the start of a session, ensuring both see the same truth and continue where the previous one left off.
 
 ![Koordinacija alata](assets/2.png)
-*Slika 2: Shema koordinacije i handoff-a između različitih AI alata korištenjem memory injection.*
 
 ---
 
@@ -52,7 +50,6 @@ When a new session begins, the agent loads the latest `receipt`, and the `select
 The AI does not choose work "at random" or based on code line counts, but strictly follows the order dictated by the protocol.
 
 ![Automatski izbor zadataka](assets/3.png)
-*Slika 3: Vizualizacija Priority Selector-a koji deterministički dodjeljuje sljedeći zadatak.*
 
 ---
 
@@ -67,7 +64,6 @@ Instead of the entire project history, the agent loads only:
 This saves resources and prevents the AI from being confused by outdated information from earlier development phases.
 
 ![Bounded Context i ušteda tokena](assets/4.png)
-*Slika 4: Kako bounded context reducira potrošnju tokena i fokusira agent na relevantne artefakte.*
 
 ---
 
@@ -78,7 +74,6 @@ Each finding must be judged claim‑by‑claim as `CONFIRMED`, `FALSE_POSITIVE`,
 This ensures that no suggestion remains "in the air," but instead receives a formal engineering verdict.
 
 ![Verifikacija pronađenih tvrdnji](assets/5.png)
-*Slika 5: Proces evaluacije i zapisivanja vanjskih nalaza kao dokaznog materijala.*
 
 ---
 
@@ -88,7 +83,6 @@ At the end of each session, the agent must generate a `ready‑to‑copy prompt`
 This prompt directly references the `Spec ID` and `operating mode`, creating an unbroken chain of development where the user simply copies the instruction prepared by the previous session based on[...]
 
 ![Zatvaranje sesije i priprema prompta za slijedeću](assets/6.png)
-*Slika 6: Formalizirani zaključak sesije koji generira prompt za naredni rad.*
 
 ---
 
@@ -101,7 +95,6 @@ This prompt directly references the `Spec ID` and `operating mode`, creating an 
 5. Link evidence artifacts in receipts rather than embedding large contents.
 
 ![Upute za korištenje templata](assets/7.png)
-*Slika 7: Primjer tijeka rada pri korištenju templata u novom repozitoriju.*
 
 ---
 
@@ -113,7 +106,6 @@ This prompt directly references the `Spec ID` and `operating mode`, creating an 
 - It is not a complete implementation of any particular agent integration.
 
 ![Ograničenja templata](assets/8.png)
-*Slika 8: Naglasak na to da je ovo template, a ne potpuno gotov runtime.*
 
 ---
 
@@ -126,7 +118,6 @@ This prompt directly references the `Spec ID` and `operating mode`, creating an 
 - External findings should be reviewed via `MODE=REVIEW` and recorded in receipts.
 
 ![Preporučeni workflow](assets/9.png)
-*Slika 9: Preporučeni proces: spec → session → receipt → index.*
 
 ---
 
